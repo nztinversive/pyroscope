@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Mapbox overrides for dark theme */
+.mapboxgl-popup-content {
+  background: #1f2937 !important;
+  color: #f3f4f6 !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+}
+.mapboxgl-popup-tip {
+  border-top-color: #1f2937 !important;
+}
+.mapboxgl-popup-close-button {
+  color: #9ca3af !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+/* Drop zone */
+.drop-active { border-color: #f97316 !important; background: rgba(249,115,22,0.1) !important; }
