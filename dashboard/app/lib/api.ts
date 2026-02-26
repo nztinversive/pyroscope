@@ -69,7 +69,8 @@ export async function getDetections(params?: {
   if (params?.since) q.set("since", params.since);
   const res = await fetch(`${API_URL}/api/v1/detections?${q}`, { headers: headers() });
   if (!res.ok) throw new Error(`Failed to fetch detections: ${res.status}`);
-  return res.json();
+  const data = await res.json();
+  return Array.isArray(data) ? data : data.detections || [];
 }
 
 export async function getHealth() {

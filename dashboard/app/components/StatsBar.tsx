@@ -1,11 +1,12 @@
 "use client";
 import { DetectionResult } from "../lib/api";
 
-export default function StatsBar({ detections }: { detections: DetectionResult[] }) {
-  const total = detections.length;
-  const fires = detections.filter((d) => d.has_fire).length;
-  const smokes = detections.filter((d) => d.has_smoke).length;
-  const avgMs = total ? Math.round(detections.reduce((s, d) => s + d.inference_ms, 0) / total) : 0;
+export default function StatsBar({ detections = [] }: { detections: DetectionResult[] }) {
+  const safeDetections = Array.isArray(detections) ? detections : [];
+  const total = safeDetections.length;
+  const fires = safeDetections.filter((d) => d.has_fire).length;
+  const smokes = safeDetections.filter((d) => d.has_smoke).length;
+  const avgMs = total ? Math.round(safeDetections.reduce((s, d) => s + d.inference_ms, 0) / total) : 0;
 
   const stats = [
     { label: "Total Detections", value: total, color: "text-fire-400" },
