@@ -1,0 +1,30 @@
+name: Push to Replicate
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest-8-cores
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download model weights
+        run: |
+          # Weights stored as GitHub release asset
+          curl -L -o best.pt "${{ secrets.MODEL_WEIGHTS_URL }}"
+          ls -la best.pt
+      
+      - name: Install Cog
+        run: |
+          sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_linux_x86_64
+          sudo chmod +x /usr/local/bin/cog
+      
+      - name: Push to Replicate
+        env:
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+        run: |
+          cog push r8.im/nztinversive/pyroscope
