@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+api/data/
+api/models/*.pt
+*.egg-info/
+dist/
+build/
+node_modules/
+.next/
+dashboard/node_modules/
+dashboard/.next/
