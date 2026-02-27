@@ -23,6 +23,10 @@ jobs:
           sudo curl -o /usr/local/bin/cog -L https://github.com/replicate/cog/releases/latest/download/cog_linux_x86_64
           sudo chmod +x /usr/local/bin/cog
       
+      - name: Login to Replicate
+        run: |
+          echo "${{ secrets.REPLICATE_API_TOKEN }}" | cog login --token-stdin
+
       - name: Push to Replicate
         env:
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
