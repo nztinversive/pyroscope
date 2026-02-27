@@ -24,11 +24,11 @@ jobs:
           sudo chmod +x /usr/local/bin/cog
       
       - name: Login to Replicate
+        env:
+          COG_TOKEN: ${{ secrets.REPLICATE_CLI_TOKEN }}
         run: |
-          echo "${{ secrets.REPLICATE_API_TOKEN }}" | cog login --token-stdin
+          echo "$COG_TOKEN" | cog login --token-stdin
 
       - name: Push to Replicate
-        env:
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
         run: |
           cog push r8.im/nztinversive/pyroscope
